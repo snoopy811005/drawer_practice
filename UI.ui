@@ -33,6 +33,44 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_zoom_in">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>30</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>zoom in</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_zoom_out">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>90</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>zoom out</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

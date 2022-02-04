@@ -21,6 +21,20 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.label.setFont(font)
         self.label.setObjectName("label")
+        self.btn_zoom_in = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_zoom_in.setGeometry(QtCore.QRect(1020, 30, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.btn_zoom_in.setFont(font)
+        self.btn_zoom_in.setObjectName("btn_zoom_in")
+        self.btn_zoom_out = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_zoom_out.setGeometry(QtCore.QRect(1020, 90, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.btn_zoom_out.setFont(font)
+        self.btn_zoom_out.setObjectName("btn_zoom_out")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 25))
@@ -37,6 +51,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "TextLabel"))
+        self.btn_zoom_in.setText(_translate("MainWindow", "zoom in"))
+        self.btn_zoom_out.setText(_translate("MainWindow", "zoom out"))
 
 
 if __name__ == "__main__":
