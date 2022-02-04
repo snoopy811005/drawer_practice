@@ -19,5 +19,11 @@
 - 功能 : 建立捲軸功能，使超過可視範圍的圖檔可以透過滾動捲軸觀看，克服圖檔過大造成只能顯示部分圖檔影像的問題。
 
 ## Part_4
-- 功能 : 增加 "開啟檔案" 按鈕，讓使用者可以選擇圖檔。支援圖檔格式有 
+- 功能 : 增加 "open file" 按鈕，讓使用者可以選擇圖檔。支援圖檔格式有 
 ('bmp', 'jpeg', 'jpg', 'png', 'tiff', 'tif', 'pic')。
+
+## Part_5
+- 功能 : 建立可以縮放圖檔大小的 slider。點擊 "zoom in" 按鈕或 "zoom out" 按鈕，slider 會相對應的移動。
+
+## Reference
+1. https://www.wongwonggoods.com/python/pyqt5-1/

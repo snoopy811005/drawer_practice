@@ -10,23 +10,35 @@ class img_controller(object):
         self.qimg = None  # image with QImage type(RGB)
         self.qpixmap = None  # image with QPixmap type
         self.qpixmap_height = None  # get QPixmap's height for resize
+        self.slider_value = 50 # slider value 50 = scale ratio 100%
 
         self.__read_img()
         self.__display_img()
 
     def set_zoom_in(self):
-        # minimum value = original image * 2%
-        self.qpixmap_height = max(int(self.qpixmap.height() * 0.02), self.qpixmap_height - 100)
+        # set slider value and move slider
+        self.slider_value = max(1, self.slider_value - 1)
+        self.__move_slider()
+        # minimum value = original image * 0.02
+        self.qpixmap_height = int(self.qpixmap.height() * (self.slider_value / 50))
         self.__display_img()
 
     def set_zoom_out(self):
-        # maximum value = original image * 200%
-        self.qpixmap_height = min(self.qpixmap_height + 100, int(self.qpixmap.height() * 2))
+        # set slider value and move slider
+        self.slider_value = min(self.slider_value + 1, 100)
+        self.__move_slider()
+        # maximum value = original image * 2
+        self.qpixmap_height = int(self.qpixmap.height() * (self.slider_value / 50))
         self.__display_img()
 
     def set_img_path(self, img_path):
         self.img_path = img_path
         self.__read_img()
+        self.__display_img()
+
+    def set_slider_value(self, slider_value):
+        self.slider_value = slider_value
+        self.qpixmap_height = int(self.qpixmap.height() * (slider_value / 50))
         self.__display_img()
 
     def __read_img(self):
@@ -43,6 +55,8 @@ class img_controller(object):
         # QPixmap type
         self.qpixmap = QPixmap.fromImage(self.qimg)
         self.qpixmap_height = self.qpixmap.height()
+        # initialize slider value
+        self.slider_value = 50
 
     def __display_img(self):
         # resize image
@@ -52,8 +66,16 @@ class img_controller(object):
         self.ui.label.setPixmap(scaled_qpixmap)
         # display text(image shape)
         self.__display_text_imgShape((scaled_qpixmap.width(), scaled_qpixmap.height()))
+        # display text(image ratio)
+        self.__display_text_imgRatio()
 
     def __display_text_imgShape(self, scaledImgShape):
         self.ui.label_img_shape_original.setText(f"Original img shape = ({self.qpixmap.width()}, {self.qpixmap.height()})")
         self.ui.label_img_shape_current.setText(f"Current img shape = ({scaledImgShape[0]}, {scaledImgShape[1]})")
 
+    def __display_text_imgRatio(self):
+        ratio = int((self.slider_value / 50) * 100)
+        self.ui.label_img_ratio.setText(f"Ratio:{ratio}%")
+
+    def __move_slider(self):
+        self.ui.slider_zoom.setProperty("value", self.slider_value)
