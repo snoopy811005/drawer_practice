@@ -23,8 +23,8 @@
    <widget class="QPushButton" name="btn_zoom_in">
     <property name="geometry">
      <rect>
-      <x>1020</x>
-      <y>30</y>
+      <x>940</x>
+      <y>70</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -42,8 +42,8 @@
    <widget class="QPushButton" name="btn_zoom_out">
     <property name="geometry">
      <rect>
-      <x>1150</x>
-      <y>30</y>
+      <x>1050</x>
+      <y>70</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -61,7 +61,7 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>20</x>
       <y>30</y>
       <width>901</width>
       <height>601</height>
@@ -106,13 +106,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label_img_shape">
+   <widget class="QLabel" name="label_img_shape_original">
     <property name="geometry">
      <rect>
-      <x>1030</x>
-      <y>70</y>
-      <width>201</width>
-      <height>20</height>
+      <x>940</x>
+      <y>150</y>
+      <width>301</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -121,7 +121,59 @@
      </font>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>Original img shape = (1024, 768)</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="slider_zoom">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>120</y>
+      <width>201</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_ratio">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>110</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ratio:100%</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_img_shape_current">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>180</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Current img shape = (1024, 768)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_open_image">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>30</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>open file</string>
     </property>
    </widget>
   </widget>
