@@ -44,6 +44,8 @@ class MainWindow_controller(QMainWindow):
         img_format = ('bmp', 'jpeg', 'jpg', 'png', 'tiff', 'tif', 'pic')
         filename, filetype = QFileDialog.getOpenFileName(self, "Open file", "./") # open current path dialog
         self.img_path = 'image/sad.jpg' if filename.split('.')[-1] not in img_format else filename
+        # initialize image file path for save
+        self.save_img_path = '' if self.img_path == 'image/sad.jpg' else self.img_path
         # initialize slider value
         self.ui.slider_zoom.setProperty("value", 50)
         # initialize point & curve & line button
@@ -100,6 +102,11 @@ class MainWindow_controller(QMainWindow):
         self.ui.btn_paint_point.setProperty("enabled", True)
         self.ui.btn_paint_curve.setProperty("enabled", True)
         self.ui.btn_paint_line.setProperty("enabled", False)
+        # activate mouseMoveEvent(setMouseTracking = True)
+        self.ui.label.setMouseTracking(True)
+        self.ui.label.mouseMoveEvent = self.img_controller.do_nothing
+        # activate mousePressEvent
+        self.ui.label.mousePressEvent = self.img_controller.paint_line
 
     def get_slider_value(self):
         # scale and display image

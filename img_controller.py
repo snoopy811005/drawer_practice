@@ -12,6 +12,7 @@ class img_controller(object):
         self.qpixmap_height = None  # get QPixmap's height for resize
         self.painted_img = None # painted image with OpenCV type(BGR)
         self.slider_value = 50 # slider value 50 = scale ratio 100%
+        self.two_point_of_line = list() # start point & end point
 
         self.__read_img()
         self.__display_img()
@@ -62,6 +63,26 @@ class img_controller(object):
             print(f"current mouse pos = ({cur_x}, {cur_y}), real mouse pos = ({real_x}, {real_y})")
             self.__draw_point((real_x, real_y), (0, 0, 255), 3)
 
+    def paint_line(self, event):
+        ratio = self.slider_value / 50
+        cur_x, cur_y, real_x, real_y = self.__calculate_position(event, ratio)
+        # check clicked position is over current image size or not
+        if cur_x <= (self.qpixmap.width() * ratio) and cur_y <= (self.qpixmap.height() * ratio):
+            self.__display_text_mousePos((cur_x, cur_y), (real_x, real_y))
+            print(f"current mouse pos = ({cur_x}, {cur_y}), real mouse pos = ({real_x}, {real_y})")
+
+        self.two_point_of_line.append((real_x, real_y))
+        if len(self.two_point_of_line) % 2 == 0:
+            # check start point & end point are over current image size or not
+            if self.two_point_of_line[-2][0] <= (self.qpixmap.width() * ratio) and \
+                    self.two_point_of_line[-2][1] <= (self.qpixmap.height() * ratio) and \
+                    self.two_point_of_line[-1][0] <= (self.qpixmap.width() * ratio) and \
+                    self.two_point_of_line[-1][1] <= (self.qpixmap.height() * ratio):
+                self.__draw_line(self.two_point_of_line[-2], self.two_point_of_line[-1], (0, 0, 255), 3)
+            else:
+                self.two_point_of_line.pop() # remove end point
+                self.two_point_of_line.pop() # remove start point
+
     def do_nothing(self, event):
         pass
 
@@ -83,6 +104,8 @@ class img_controller(object):
         self.painted_img = self.img
         # initialize slider value
         self.slider_value = 50
+        # initialize list(clear all records)
+        self.two_point_of_line.clear()
         # initialize mouse position value
         self.__display_text_mousePos((0, 0), (0, 0))
 
@@ -123,6 +146,17 @@ class img_controller(object):
         # draw point
         point_size = 1 # circle radius
         self.painted_img = cv2.circle(self.painted_img, point, point_size, color, thickness)
+        # update image information
+        height, width, channel = self.painted_img.shape
+        self.qimg = QImage(self.painted_img, width, height, 3 * width, QImage.Format_RGB888).rgbSwapped()
+        self.qpixmap = QPixmap.fromImage(self.qimg)
+        self.qpixmap_height = int(self.qpixmap.height() * (self.slider_value / 50))
+        # display image
+        self.__display_img()
+
+    def __draw_line(self, start_point, end_point, color, thickness):
+        # draw line
+        self.painted_img = cv2.line(self.painted_img, start_point, end_point, color, thickness)
         # update image information
         height, width, channel = self.painted_img.shape
         self.qimg = QImage(self.painted_img, width, height, 3 * width, QImage.Format_RGB888).rgbSwapped()
