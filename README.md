@@ -29,6 +29,14 @@
 - 功能 : 增加 "save file" 按鈕和 "save as ..." 按鈕，讓使用者可以儲存圖檔。
 支援圖檔格式有 ('jpeg', 'jpg', 'png', 'tiff')。
 
+## Part_7
+- 功能 : 追蹤滑鼠座標。
+
+## Part_8
+- 功能 : 增加 "point" 按鈕和 "curve" 按鈕，讓使用者可以畫點或畫曲線。
+- 問題 : 目前只能畫出固定的顏色及大小。
+
 ## Reference
 1. https://www.wongwonggoods.com/python/pyqt5-1/
 2. https://stackoverflow.com/questions/64214892/python-pyqt5-add-file-name-to-getsavefilename
+3. https://stackoverflow.com/questions/41688668/how-to-return-mouse-coordinates-in-realtime
