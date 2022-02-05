@@ -18,7 +18,7 @@ class img_controller(object):
     def set_zoom_in(self):
         # set slider value and move slider
         self.slider_value = max(1, self.slider_value - 1)
-        self.__move_slider()
+        self.__move_slider_whenZoom()
         # minimum value = original image * 0.02
         self.qpixmap_height = int(self.qpixmap.height() * (self.slider_value / 50))
         self.__display_img()
@@ -26,7 +26,7 @@ class img_controller(object):
     def set_zoom_out(self):
         # set slider value and move slider
         self.slider_value = min(self.slider_value + 1, 100)
-        self.__move_slider()
+        self.__move_slider_whenZoom()
         # maximum value = original image * 2
         self.qpixmap_height = int(self.qpixmap.height() * (self.slider_value / 50))
         self.__display_img()
@@ -40,6 +40,9 @@ class img_controller(object):
         self.slider_value = slider_value
         self.qpixmap_height = int(self.qpixmap.height() * (slider_value / 50))
         self.__display_img()
+
+    def save_img(self, path):
+        self.qpixmap.save(path)
 
     def __read_img(self):
         # OpenCV type(BGR)
@@ -77,5 +80,5 @@ class img_controller(object):
         ratio = int((self.slider_value / 50) * 100)
         self.ui.label_img_ratio.setText(f"Ratio:{ratio}%")
 
-    def __move_slider(self):
+    def __move_slider_whenZoom(self):
         self.ui.slider_zoom.setProperty("value", self.slider_value)

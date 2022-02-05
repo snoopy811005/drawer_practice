@@ -25,5 +25,10 @@
 ## Part_5
 - 功能 : 建立可以縮放圖檔大小的 slider。點擊 "zoom in" 按鈕或 "zoom out" 按鈕，slider 會相對應的移動。
 
+## Part_6
+- 功能 : 增加 "save file" 按鈕和 "save as ..." 按鈕，讓使用者可以儲存圖檔。
+支援圖檔格式有 ('jpeg', 'jpg', 'png', 'tiff')。
+
 ## Reference
 1. https://www.wongwonggoods.com/python/pyqt5-1/
+2. https://stackoverflow.com/questions/64214892/python-pyqt5-add-file-name-to-getsavefilename
