@@ -12,6 +12,7 @@ class img_controller(object):
         self.qpixmap_height = None  # get QPixmap's height for resize
         self.painted_img = None # painted image with OpenCV type(BGR)
         self.slider_value = 50 # slider value 50 = scale ratio 100%
+        self.resize_value = 100 # resize value 100 = resize ratio 100%
         self.two_point_of_line = list() # start point & end point
 
         self.__read_img()
@@ -41,6 +42,19 @@ class img_controller(object):
     def set_slider_value(self, slider_value):
         self.slider_value = slider_value
         self.qpixmap_height = int(self.qpixmap.height() * (slider_value / 50))
+        self.__display_img()
+
+    def set_resize_value(self, resize_value):
+        self.resize_value = resize_value
+        # initialize and set slider value
+        self.slider_value = 50
+        self.ui.slider_zoom.setProperty("value", 50)
+        # resize original image
+        self.qpixmap_height = int(self.qpixmap.height() * (resize_value / 100))
+        self.qpixmap = self.qpixmap.scaledToHeight(self.qpixmap_height)
+        # resize painted image
+        self.painted_img = cv2.resize(self.painted_img, (self.qpixmap.width(), self.qpixmap.height()), cv2.INTER_LINEAR)
+        # display image
         self.__display_img()
 
     def save_img(self, path):
@@ -108,6 +122,8 @@ class img_controller(object):
         self.painted_img = self.img
         # initialize slider value
         self.slider_value = 50
+        # initialize resize value
+        self.resize_value = 100
         # initialize list(clear all records)
         self.two_point_of_line.clear()
         # initialize mouse position value

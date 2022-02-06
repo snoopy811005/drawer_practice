@@ -46,7 +46,12 @@
 ## Part_11
 - 功能 : 可以畫出不同顏色及大小的點、曲線和直線。顏色 (R, G, B) 範圍為 [0, 255]，大小範圍為 [1, 30]。
 
+## Part_12
+- 功能 : 建立可以修改圖檔大小的編輯器。調整比例範圍為 [1, 200]。
+- 差異 : Part_2 和 Part_5 的縮放不會影響原始圖檔的大小，但是 Part_12 的調整會直接修改原始圖檔的大小。
+
 ## Reference
 1. https://www.wongwonggoods.com/python/pyqt5-1/
 2. https://stackoverflow.com/questions/64214892/python-pyqt5-add-file-name-to-getsavefilename
 3. https://stackoverflow.com/questions/41688668/how-to-return-mouse-coordinates-in-realtime
+4. https://stackoverflow.com/questions/60333416/using-pyqt5-lineedit-widget-is-there-any-simple-way-only-integer-values-are-ava

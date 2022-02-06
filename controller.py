@@ -1,6 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QFileDialog
-import os
+from PyQt5.QtGui import QIntValidator
 
 from UI import Ui_MainWindow
 from img_controller import img_controller
@@ -28,7 +28,8 @@ class MainWindow_controller(QMainWindow):
         self.ui.btn_paint_point.clicked.connect(self.start_paint_point)
         self.ui.btn_paint_curve.clicked.connect(self.start_paint_curve)
         self.ui.btn_paint_line.clicked.connect(self.start_paint_line)
-        self.ui.slider_zoom.valueChanged.connect(self.get_slider_value)
+        self.ui.slider_zoom.valueChanged.connect(self.get_scale_slider_value)
+        self.ui.edit_resize.returnPressed.connect(self.get_resize_value)
 
         # Step 3 -> set scrollArea property
         self.ui.scrollArea.setWidgetResizable(True) # activate scroll bar
@@ -40,6 +41,9 @@ class MainWindow_controller(QMainWindow):
 
         # Step 5 -> activate mousePressEvent
         self.ui.label.mousePressEvent = self.img_controller.get_mouse_position
+
+        # Step 6 -> set lineEdit property(input integer and range from 1 to 200)
+        self.ui.edit_resize.setValidator(QIntValidator(1, 200))
 
     def new_file(self):
         self.img_path = 'image/empty.jpg'
@@ -106,9 +110,14 @@ class MainWindow_controller(QMainWindow):
         # activate mousePressEvent
         self.ui.label.mousePressEvent = self.img_controller.paint_line
 
-    def get_slider_value(self):
+    def get_scale_slider_value(self):
         # scale and display image
         self.img_controller.set_slider_value(self.ui.slider_zoom.value())
+
+    def get_resize_value(self):
+        # resize and display image
+        self.img_controller.set_resize_value(int(self.ui.edit_resize.text()))
+        print(f"resize ratio = {int(self.ui.edit_resize.text())}%")
 
     def __initialize_setting(self, mode):
         # initialize image file path for save
@@ -123,6 +132,7 @@ class MainWindow_controller(QMainWindow):
         self.ui.spin_color_green.setProperty("value", 0)
         self.ui.spin_color_blue.setProperty("value", 0)
         self.ui.spin_size.setProperty("value", 5)
+        self.ui.edit_resize.setProperty("text", 100)
         # initialize point & curve & line button
         self.ui.btn_paint_point.setProperty("enabled", True)
         self.ui.btn_paint_curve.setProperty("enabled", True)
