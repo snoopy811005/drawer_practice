@@ -40,6 +40,9 @@
 - 功能 : 增加 "line" 按鈕，讓使用者可以畫直線。
 - 問題 : 目前仍然只能畫出固定的顏色及大小。
 
+## Part_10
+- 功能 : 增加 "new file" 按鈕，讓使用者可以開新圖檔。
+
 ## Reference
 1. https://www.wongwonggoods.com/python/pyqt5-1/
 2. https://stackoverflow.com/questions/64214892/python-pyqt5-add-file-name-to-getsavefilename

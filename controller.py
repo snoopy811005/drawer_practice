@@ -21,6 +21,7 @@ class MainWindow_controller(QMainWindow):
         # Step 2 -> set connection(when button clicked or slider moved)
         self.ui.btn_zoom_in.clicked.connect(self.img_controller.set_zoom_in)
         self.ui.btn_zoom_out.clicked.connect(self.img_controller.set_zoom_out)
+        self.ui.btn_new_image.clicked.connect(self.new_file)
         self.ui.btn_open_image.clicked.connect(self.open_file)
         self.ui.btn_save_image.clicked.connect(self.save_file)
         self.ui.btn_save_as_image.clicked.connect(self.save_file_as)
@@ -40,22 +41,19 @@ class MainWindow_controller(QMainWindow):
         # Step 5 -> activate mousePressEvent
         self.ui.label.mousePressEvent = self.img_controller.get_mouse_position
 
+    def new_file(self):
+        self.img_path = 'image/empty.jpg'
+        # initialize setting
+        self.__initialize_setting('new')
+        # read and display image
+        self.img_controller.set_img_path(self.img_path)
+
     def open_file(self):
         img_format = ('bmp', 'jpeg', 'jpg', 'png', 'tiff', 'tif', 'pic')
         filename, filetype = QFileDialog.getOpenFileName(self, "Open file", "./") # open current path dialog
         self.img_path = 'image/sad.jpg' if filename.split('.')[-1] not in img_format else filename
-        # initialize image file path for save
-        self.save_img_path = '' if self.img_path == 'image/sad.jpg' else self.img_path
-        # initialize slider value
-        self.ui.slider_zoom.setProperty("value", 50)
-        # initialize point & curve & line button
-        self.ui.btn_paint_point.setProperty("enabled", True)
-        self.ui.btn_paint_curve.setProperty("enabled", True)
-        self.ui.btn_paint_line.setProperty("enabled", True)
-        # initialize mouse event
-        self.ui.label.setMouseTracking(True)
-        self.ui.label.mouseMoveEvent = self.img_controller.get_mouse_position
-        self.ui.label.mousePressEvent = self.img_controller.get_mouse_position
+        # initialize setting
+        self.__initialize_setting('open')
         # read and display image
         self.img_controller.set_img_path(self.img_path)
 
@@ -111,3 +109,20 @@ class MainWindow_controller(QMainWindow):
     def get_slider_value(self):
         # scale and display image
         self.img_controller.set_slider_value(self.ui.slider_zoom.value())
+
+    def __initialize_setting(self, mode):
+        # initialize image file path for save
+        if mode == 'new':
+            self.save_img_path = ''
+        elif mode == 'open':
+            self.save_img_path = '' if self.img_path == 'image/sad.jpg' else self.img_path
+        # initialize slider value
+        self.ui.slider_zoom.setProperty("value", 50)
+        # initialize point & curve & line button
+        self.ui.btn_paint_point.setProperty("enabled", True)
+        self.ui.btn_paint_curve.setProperty("enabled", True)
+        self.ui.btn_paint_line.setProperty("enabled", True)
+        # initialize mouse event
+        self.ui.label.setMouseTracking(True)
+        self.ui.label.mouseMoveEvent = self.img_controller.get_mouse_position
+        self.ui.label.mousePressEvent = self.img_controller.get_mouse_position
