@@ -118,6 +118,11 @@ class MainWindow_controller(QMainWindow):
             self.save_img_path = '' if self.img_path == 'image/sad.jpg' else self.img_path
         # initialize slider value
         self.ui.slider_zoom.setProperty("value", 50)
+        # initialize spin value
+        self.ui.spin_color_red.setProperty("value", 0)
+        self.ui.spin_color_green.setProperty("value", 0)
+        self.ui.spin_color_blue.setProperty("value", 0)
+        self.ui.spin_size.setProperty("value", 5)
         # initialize point & curve & line button
         self.ui.btn_paint_point.setProperty("enabled", True)
         self.ui.btn_paint_curve.setProperty("enabled", True)

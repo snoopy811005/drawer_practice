@@ -43,6 +43,9 @@
 ## Part_10
 - 功能 : 增加 "new file" 按鈕，讓使用者可以開新圖檔。
 
+## Part_11
+- 功能 : 可以畫出不同顏色及大小的點、曲線和直線。顏色 (R, G, B) 範圍為 [0, 255]，大小範圍為 [1, 30]。
+
 ## Reference
 1. https://www.wongwonggoods.com/python/pyqt5-1/
 2. https://stackoverflow.com/questions/64214892/python-pyqt5-add-file-name-to-getsavefilename

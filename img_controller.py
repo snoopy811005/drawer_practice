@@ -61,7 +61,9 @@ class img_controller(object):
         if cur_x <= (self.qpixmap.width() * ratio) and cur_y <= (self.qpixmap.height() * ratio):
             self.__display_text_mousePos((cur_x, cur_y), (real_x, real_y))
             print(f"current mouse pos = ({cur_x}, {cur_y}), real mouse pos = ({real_x}, {real_y})")
-            self.__draw_point((real_x, real_y), (0, 0, 255), 3)
+            color = (self.ui.spin_color_blue.value(), self.ui.spin_color_green.value(), self.ui.spin_color_red.value())
+            size = self.ui.spin_size.value()
+            self.__draw_point((real_x, real_y), color, size)
 
     def paint_line(self, event):
         ratio = self.slider_value / 50
@@ -78,7 +80,9 @@ class img_controller(object):
                     self.two_point_of_line[-2][1] <= (self.qpixmap.height() * ratio) and \
                     self.two_point_of_line[-1][0] <= (self.qpixmap.width() * ratio) and \
                     self.two_point_of_line[-1][1] <= (self.qpixmap.height() * ratio):
-                self.__draw_line(self.two_point_of_line[-2], self.two_point_of_line[-1], (0, 0, 255), 3)
+                color = (self.ui.spin_color_blue.value(), self.ui.spin_color_green.value(), self.ui.spin_color_red.value())
+                size = self.ui.spin_size.value()
+                self.__draw_line(self.two_point_of_line[-2], self.two_point_of_line[-1], color, size)
             else:
                 self.two_point_of_line.pop() # remove end point
                 self.two_point_of_line.pop() # remove start point
